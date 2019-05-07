@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Croc Hunter</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel='stylesheet' href='/static/game.css'/>
+    <link rel="icon" type="image/png" href="/static/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/static/favicon-32x32.png" sizes="32x32" />
+</head>
+<body>
+    <canvas id="canvasBg" width="800" height="490" ></canvas>
+    <canvas id="canvasEnemy" width="800" height="500" ></canvas>
+    <canvas id="canvasJet" width="800" height="500" ></canvas>
+    <canvas id="canvasHud" width="800" height="500" ></canvas>
+    <script src='/static/game.js'></script>
+    <div class="details">
+    <strong>Hostname: </strong><span id="hostname" th:text=${hostname}></span><br>
+    <strong>Region: </strong><span id="region" th:text=${region}></span><br>
+    <strong>Release: </strong><span id="release" th:text=${release}></span><br>
+    <strong>Commit: </strong><span id="commit" th:text=${commit}></span><br>
+    <strong>Powered By: </strong><span id="powered" th:text=${powered}><br>
+    </div>
+</body>
+</html>
