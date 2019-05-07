@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta2
+kind: Config
+build:
+  artifacts:
+  - image: changeme
+    context: .
+    docker: {}
+  tagPolicy:
+    envTemplate:
+      template: '{{.DOCKER_REGISTRY}}/carlossg/croc-hunter-java:{{.VERSION}}'
+  local: {}
+deploy:
+  kubectl: {}
+profiles:
+- name: dev
+  build:
+    artifacts:
+    - docker: {}
+    tagPolicy:
+      envTemplate:
+        template: '{{.DOCKER_REGISTRY}}/carlossg/croc-hunter-java:{{.DIGEST_HEX}}'
+    local: {}
+  deploy:
+    helm:
+      releases:
+      - name: croc-hunter-java
+        chartPath: charts/croc-hunter-java
+        setValueTemplates:
+          image.repository: '{{.DOCKER_REGISTRY}}/carlossg/croc-hunter-java'
+          image.tag: '{{.DIGEST_HEX}}'
