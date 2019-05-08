@@ -1,6 +1,7 @@
 FROM openjdk:8-jdk-slim
 ENV PORT 8080
 ENV CLASSPATH /opt/lib
+
 EXPOSE 8080
 
 # copy pom.xml and wildcards to avoid this command failing if there's no target/lib directory
