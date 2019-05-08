@@ -6,9 +6,13 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,15 +21,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class MainController {
 
-    private String hostname;
-    private String region;
-    private String release;
-    private String commit;
-    private String powered;
+    private static final String GOOGLE_API_URL = "http://metadata.google.internal/computeMetadata/v1/instance/attributes/cluster-location";
+
+    private String hostname = "";
+    private String region = "";
+    private String release = "";
+    private String commit = "";
+    private String powered = "";
 
     public MainController() {
         Class<MainController> clazz = MainController.class;
@@ -42,13 +49,26 @@ public class MainController {
             Manifest manifest = new Manifest(new URL(manifestPath).openStream());
             Attributes attr = manifest.getMainAttributes();
             hostname = InetAddress.getLocalHost().getHostName();
-            region = getRegion();
             release = attr.getValue("Implementation-Version");
             commit = attr.getValue("Implementation-SCM-Revision");
             powered = attr.getValue("Implementation-Powered-By");
+            region = getRegion();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+    }
+
+    private String getRegion() {
+        RestTemplate restTemplate = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Metadata-Flavor", "Google");
+        headers.set("Other-Header", "othervalue");
+        HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
+        ResponseEntity<String> response = restTemplate.exchange(GOOGLE_API_URL, HttpMethod.GET, entity, String.class);
+        String region = response.getBody();
+        System.out.println("Region: " + region);
+        return region;
     }
 
     @GetMapping("/")
@@ -59,11 +79,6 @@ public class MainController {
         model.addAttribute("commit", commit);
         model.addAttribute("powered", powered);
         return "index";
-    }
-
-    private String getRegion() {
-        // TODO
-        return "TODO";
     }
 
     @GetMapping("/healthz")
