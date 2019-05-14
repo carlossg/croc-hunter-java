@@ -8,14 +8,13 @@ Basic Spring Boot app to demonstrate example CI/CD pipeline using Kubernetes
 
 # Deploy using JenkinsX (Kubernetes, Helm, Monocular, ChartMuseum)
 
-Just follow the [JenkinsX](http://jenkins-x.io) installation with `--prow=true`
+Just follow the [JenkinsX](http://jenkins-x.io) installation with Tekton
 
-For example, if using GKE with cert-manager preinstalled for https certificates
+For example, if using GKE
 
 ```bash
 jx install \
     --provider=gke \
-    --domain=eu.g.csanchez.org \
     --tekton
 jx upgrade ingress
 ```
@@ -25,7 +24,8 @@ Then fork this repo and [import it](http://jenkins-x.io/developing/import/)
 ```bash
 jx import \
     --url https://github.com/GITHUB_USER/croc-hunter-jenkinsx-serverless \
-    --no-draft
+    --no-draft \
+    --pack=maven
 ```
 
 Then, any PRs against this repo will be automatically deployed to preview environments.
