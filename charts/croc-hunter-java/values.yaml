@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 replicaCount: 1
 image:
-  repository: draft
-  tag: dev
+  repository: 10.31.248.185:5000/carlossg/croc-hunter-java
+  tag: 0.0.9
   pullPolicy: IfNotPresent
 
 # define environment variables here as a map of key: value
