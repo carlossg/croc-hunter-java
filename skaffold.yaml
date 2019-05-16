@@ -7,7 +7,7 @@ build:
     docker: {}
   tagPolicy:
     envTemplate:
-      template: '{{.DOCKER_REGISTRY}}/carlossg/croc-hunter-java:{{.VERSION}}'
+      template: '{{.DOCKER_REGISTRY}}/{{.ORG}}/croc-hunter-java:{{.VERSION}}'
   local: {}
 deploy:
   kubectl: {}
@@ -18,7 +18,7 @@ profiles:
     - docker: {}
     tagPolicy:
       envTemplate:
-        template: '{{.DOCKER_REGISTRY}}/carlossg/croc-hunter-java:{{.DIGEST_HEX}}'
+        template: '{{.DOCKER_REGISTRY}}/{{.ORG}}/croc-hunter-java:{{.DIGEST_HEX}}'
     local: {}
   deploy:
     helm:
@@ -26,5 +26,5 @@ profiles:
       - name: croc-hunter-java
         chartPath: charts/croc-hunter-java
         setValueTemplates:
-          image.repository: '{{.DOCKER_REGISTRY}}/carlossg/croc-hunter-java'
+          image.repository: '{{.DOCKER_REGISTRY}}/{{.ORG}}/croc-hunter-java'
           image.tag: '{{.DIGEST_HEX}}'

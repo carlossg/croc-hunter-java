@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    ORG = 'carlossg'
+    ORG = 'jenkins-x-csanchez'
     APP_NAME = 'croc-hunter-java'
     CHARTMUSEUM_CREDS = credentials('jenkins-x-chartmuseum')
   }
