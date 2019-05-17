@@ -23,7 +23,7 @@ Then fork this repo and [import it](http://jenkins-x.io/developing/import/)
 
 ```bash
 jx import \
-    --url https://github.com/GITHUB_USER/croc-hunter-jenkinsx-serverless \
+    --url https://github.com/GITHUB_USER/croc-hunter-java \
     --no-draft \
     --pack=maven
 ```
@@ -45,7 +45,7 @@ resource.labels.container_name="build-step-jenkins"
 
 To [promote from staging to production](http://jenkins-x.io/developing/promote/) just run
 
-    jx promote croc-hunter-jenkinsx --version 0.0.1 --env production
+    jx promote croc-hunter-java --version 0.0.1 --env production
 
 # Acknowledgements
 
