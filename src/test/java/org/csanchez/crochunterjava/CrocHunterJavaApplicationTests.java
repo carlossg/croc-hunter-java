@@ -1,16 +1,32 @@
 package org.csanchez.crochunterjava;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.CoreMatchers.*;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
+import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
+
+@QuarkusTest
 public class CrocHunterJavaApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void testMainEndpoint() {
+        given()
+          .when().get("/")
+          .then()
+             .statusCode(200)
+             .body(is("hello"));
+    }
+
+    @Test
+    public void testGreetingEndpoint() {
+        given()
+                .queryParam("code", 501)
+                .when().get("/status")
+                .then()
+                .statusCode(501)
+                .body(is(""));
+    }
 
 }
