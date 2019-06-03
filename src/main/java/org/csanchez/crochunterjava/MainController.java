@@ -1,10 +1,15 @@
 
 package org.csanchez.crochunterjava;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -28,24 +33,23 @@ public class MainController {
         try {
             hostname = InetAddress.getLocalHost().getHostName();
             region = getRegion();
+            System.out.println("Region: " + region);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
     }
 
-    private String getRegion() {
-        // RestTemplate restTemplate = new RestTemplate();
-        // HttpHeaders headers = new HttpHeaders();
-        // headers.set("Metadata-Flavor", "Google");
-        // headers.set("Other-Header", "othervalue");
-        // HttpEntity<HttpHeaders> entity = new HttpEntity<>(headers);
-        // ResponseEntity<String> response = restTemplate.exchange(GOOGLE_API_URL, HttpMethod.GET, entity,
-        // String.class);
-        // String region = response.getBody();
-        // System.out.println("Region: " + region);
-        // return region;
-        return "";
+    private String getRegion() throws IOException {
+        URL url = new URL(GOOGLE_API_URL);
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestProperty("Metadata-Flavor", "Google");
+        con.setRequestMethod("GET");
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+            return br.lines().collect(Collectors.joining(System.lineSeparator()));
+        } finally {
+            con.disconnect();
+        }
     }
 
     @GET
