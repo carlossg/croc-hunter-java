@@ -106,6 +106,6 @@ public class MainController {
     @Path("/status")
     public Response status(@QueryParam(value = "code") int code) {
         code = code == 0 ? 500 : code;
-        return Response.status(code).entity("{\"code\": %d}").build();
+        return Response.status(code).entity(String.format("{\"code\": %d}", code)).build();
     }
 }
