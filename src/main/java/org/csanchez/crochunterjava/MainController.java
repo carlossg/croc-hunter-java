@@ -3,12 +3,8 @@ package org.csanchez.crochunterjava;
 
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.jar.Attributes;
-import java.util.jar.Manifest;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -31,26 +27,6 @@ public class MainController {
     public MainController() {
         try {
             hostname = InetAddress.getLocalHost().getHostName();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        Class<MainController> clazz = MainController.class;
-        String className = clazz.getSimpleName() + ".class";
-        String classPath = clazz.getResource(className).toString();
-        if (!classPath.startsWith("jar")) {
-            // Class not from JAR
-            System.out.println("Class is not in jar");
-            return;
-        }
-        String manifestPath = classPath.substring(0, classPath.indexOf("!") + 1) + "/META-INF/MANIFEST.MF";
-        System.out.println("Parsing manifest in " + manifestPath);
-        try {
-            Manifest manifest = new Manifest(new URL(manifestPath).openStream());
-            Attributes attr = manifest.getMainAttributes();
-            release = attr.getValue("Implementation-Version");
-            commit = attr.getValue("Implementation-SCM-Revision");
-            powered = attr.getValue("Implementation-Powered-By");
             region = getRegion();
         } catch (IOException e) {
             e.printStackTrace();
