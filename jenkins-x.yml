@@ -15,6 +15,13 @@ pipelineConfig:
                 memory: 2Gi
         agent:
           image: docker.io/csanchez/builder-graalvm
+        stages:
+          - name: A Working Stage
+            steps:
+              - command: echo
+                args:
+                  - hello
+                  - world
     release:
       pipeline:
         options:
@@ -28,3 +35,10 @@ pipelineConfig:
                 memory: 2Gi
         agent:
           image: docker.io/csanchez/builder-graalvm
+        stages:
+          - name: A Working Stage
+            steps:
+              - command: echo
+                args:
+                  - hello
+                  - world
