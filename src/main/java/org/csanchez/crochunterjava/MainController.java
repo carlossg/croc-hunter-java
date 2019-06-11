@@ -32,12 +32,15 @@ public class MainController {
     public MainController() {
         try {
             hostname = InetAddress.getLocalHost().getHostName();
-            region = getRegion();
-            System.out.println("Region: " + region);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        try {
+            region = getRegion();
+            System.out.println("Region: " + region);
+        } catch (IOException e) {
+            System.out.println("Could not get region due to " + e.getClass().getName() + " : " + e.getMessage());
+        }
     }
 
     private String getRegion() throws IOException {
