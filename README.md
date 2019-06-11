@@ -14,11 +14,7 @@ Quarkus comes with a [built-in development mode](https://quarkus.io/guides/maven
 mvn compile quarkus:dev
 ```
 
-To build a native image
-
-```bash
-mvn package -Pnative -Dnative-image.docker-build=true
-```
+`mvn package` will build a native image.
 
 
 # Deploy using JenkinsX (Kubernetes, Helm, Monocular, ChartMuseum)
