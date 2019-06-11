@@ -4,7 +4,22 @@ For those that have dreamt to hunt crocs
 
 # Usage
 
-Basic Spring Boot app to demonstrate example CI/CD pipeline using Kubernetes
+Basic [Quarkus](https://quarkus.io/) app to demonstrate example CI/CD pipeline using Kubernetes
+
+# Local Development
+
+Quarkus comes with a [built-in development mode](https://quarkus.io/guides/maven-tooling). Run your application with:
+
+```bash
+mvn compile quarkus:dev
+```
+
+To build a native image
+
+```bash
+mvn package -Pnative -Dnative-image.docker-build=true
+```
+
 
 # Deploy using JenkinsX (Kubernetes, Helm, Monocular, ChartMuseum)
 
