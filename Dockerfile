@@ -1,8 +1,15 @@
-FROM registry.fedoraproject.org/fedora-minimal
-WORKDIR /work/
-COPY target/*-runner /work/application
-RUN chmod 775 /work
-# we are compiling with different dependencies, let's make the binary work with a hack
-RUN ln -s /lib64/libcrypt.so.2 /lib64/libcrypt.so.1
+FROM openjdk:11-jdk-slim
+ENV PORT 8080
+ENV CLASSPATH /opt/lib
+
 EXPOSE 8080
-CMD ["./application", "-Dquarkus.http.host=0.0.0.0"]
+
+# copy pom.xml and wildcards to avoid this command failing if there's no target/lib directory
+COPY pom.xml target/lib* /opt/lib/
+
+# NOTE we assume there's only 1 jar in the target dir
+# but at least this means we don't have to guess the name
+# we could do with a better way to know the name - or to always create an app.jar or something
+COPY target/*-runner.jar /opt/app.jar
+WORKDIR /opt
+CMD ["java", "-jar", "app.jar"]
