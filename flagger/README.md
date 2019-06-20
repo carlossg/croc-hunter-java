@@ -24,7 +24,7 @@ Update the `values.yaml` section `canary.service.hosts` with the hostname for yo
     kubectl --namespace istio-system port-forward deploy/flagger-grafana 3000
 
 Access it at [http://localhost:3000](http://localhost:3000) using admin/admin
-Go to the `canary-analysis` dashboard and select
+Go to the `Istio Canary` dashboard and select
 
 * namespace: `jx-production`
 * primary: `jx-production-croc-hunter-java-primary`
@@ -62,5 +62,5 @@ Generate delays and errors to show automatic rollbacks
 
 From a pod in the cluster (ie. a jx devpod) run
 
-    watch curl -sSL http://jx-production-croc-hunter-java-canary.jx-production.svc.cluster.local:8080/delay?wait=5
-    watch curl -sSL http://jx-production-croc-hunter-java-canary.jx-production.svc.cluster.local:8080/status?code=500
+    watch curl -sSL http://jx-croc-hunter-java-canary.jx-production.svc.cluster.local:8080/delay?wait=5
+    watch curl -sSL http://jx-croc-hunter-java-canary.jx-production.svc.cluster.local:8080/status?code=500
