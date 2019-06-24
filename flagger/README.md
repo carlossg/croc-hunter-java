@@ -53,8 +53,8 @@ Tail the flagger logs
 Generate traffic to show the version served
 
     while true; do
-        out=$(curl -sSL -w "%{http_code}" http://croc-hunter-java.istio.us.g.csanchez.org/)
-        date="$(date +%R:%S)"; echo -n $date
+        out=$(curl -sSL -w "%{http_code}" http://croc-hunter-java.istio.alibaba.g.csanchez.org/)
+        date="$(date +%R:%S)"; echo -n "$date "
         echo -n "$out          " | tail -n 1 ; echo "$out" | grep Release | grep -o '\d*\.\d*\.\d*'
     done
 
