@@ -46,12 +46,13 @@ To tail all the build logs
 
     kail -l tekton.dev/pipeline --since=5m
 
-Or in [GKE StackDriver logs](https://console.cloud.google.com/logs/viewer?authuser=1&advancedFilter=resource.type%3D%22container%22%0Aresource.labels.cluster_name%3D%22samurainarrow%22%0Aresource.labels.container_name%3Dbuild-step-jenkins)
+Or in [GKE StackDriver logs](https://console.cloud.google.com/logs/viewer)
 
 ```
-resource.type="container"
 resource.labels.cluster_name="mycluster"
-resource.labels.container_name="build-step-jenkins"
+resource.type="container"
+labels."container.googleapis.com/namespace_name"="jx"
+resource.labels.container_name:build-step-
 ```
 
 To [promote from staging to production](http://jenkins-x.io/developing/promote/) just run
