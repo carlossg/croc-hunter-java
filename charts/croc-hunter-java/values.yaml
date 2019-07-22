@@ -24,10 +24,10 @@ service:
 resources:
   limits:
     cpu: 500m
-    memory: 512Mi
+    memory: 64Mi
   requests:
-    cpu: 400m
-    memory: 512Mi
+    cpu: 100m
+    memory: 32Mi
 probePath: /healthz
 livenessProbe:
   initialDelaySeconds: 60
