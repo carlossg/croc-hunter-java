@@ -1,2 +1,2 @@
-buildPack: maven-quarkus
-buildPackGitURL: https://github.com/carlossg/jenkins-x-kubernetes
+buildPack: maven
+# buildPackGitURL: https://github.com/carlossg/jenkins-x-kubernetes
