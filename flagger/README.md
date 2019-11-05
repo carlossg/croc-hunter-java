@@ -64,3 +64,4 @@ From a pod in the cluster (ie. a jx devpod) run
 
     watch curl -sSL http://jx-croc-hunter-java-canary.jx-production.svc.cluster.local:8080/delay?wait=5
     watch curl -sSL http://jx-croc-hunter-java-canary.jx-production.svc.cluster.local:8080/status?code=500
+
