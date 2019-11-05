@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.csanchez.crochunter</groupId>
     <artifactId>croc-hunter-java</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.72</version>
     <name>croc-hunter-java</name>
     <description>Demo project for Spring Boot</description>
 
