@@ -4,7 +4,7 @@
 
 Install Istio and [Flagger](https://docs.flagger.app)
 
-    jx create addon istio --version 1.1.7
+    jx create addon istio --version 1.3.4
     jx create addon flagger
 
 Istio is enabled in the `jx-production` namespace for metrics gathering.
