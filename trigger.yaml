@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: jx-croc-hunter-java-trigger
+  namespace: jx-production
+  annotations:
+    sidecar.istio.io/inject: "false"
+spec:
+  containers:
+  - name: shell
+    image: alpine
+    resources:
+      requests:
+        cpu: 50m
+        memory: 5Mi  
+      limits:
+        cpu: 500m
+        memory: 10Mi  
+    args:
+      - sh
+      - -c
+      - while true; do out=$(wget -S -q -O - "http://jx-croc-hunter-java-canary:8080" 2>&1); date="$(date +%R:%S)"; echo -n "$date "; echo -n "$out" | grep "HTTP/" | awk '{printf $2}' ; echo -n "    "; echo "$out" | grep Release | grep -o '\d*\.\d*\.\d*'; sleep 1; done
+    stdin: true
+    tty: true
