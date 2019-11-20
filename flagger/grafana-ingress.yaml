@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: grafana
+  namespace: istio-system
+spec:
+  rules:
+  - host: flagger-grafana.us.g.csanchez.org
+    http:
+      paths:
+      - backend:
+          serviceName: flagger-grafana
+          servicePort: 80
