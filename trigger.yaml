@@ -19,6 +19,6 @@ spec:
     args:
       - sh
       - -c
-      - while true; do out=$(wget -S -q -O - "http://jx-croc-hunter-java-canary:8080" 2>&1); date="$(date +%R:%S)"; echo -n "$date "; echo -n "$out" | grep "HTTP/" | awk '{printf $2}' ; echo -n "    "; echo "$out" | grep Release | grep -o '\d*\.\d*\.\d*'; sleep 1; done
+      - while true; do out=$(wget -S -q -O - "http://croc-hunter-java.istio.us.g.csanchez.org" 2>&1); date="$(date +%R:%S)"; echo -n "$date "; echo -n "$out" | grep "HTTP/" | awk '{printf $2}' ; echo -n "    "; echo "$out" | grep Release | grep -o '\d*\.\d*\.\d*'; sleep 1; done
     stdin: true
     tty: true
